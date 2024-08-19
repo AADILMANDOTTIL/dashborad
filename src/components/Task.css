@@ -1,0 +1,7 @@
+.tr{
+    transform: translate(-50%,-50%);
+}
+::placeholder {
+    color: red;
+    opacity: 1; /* Firefox */
+  }
