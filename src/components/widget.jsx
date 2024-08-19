@@ -22,7 +22,7 @@ function widget() {
                                     </div>
 
                                     <div>
-                                        <MdDelete className='w-[120px] h-[40px]  cursor-pointer' onClick={() => (DeleteWidget(index))} />
+                                        <MdDelete className='w-[40px] h-[30px]  cursor-pointer' onClick={() => (DeleteWidget(index))} />
                                     </div>
 
                                 </div>

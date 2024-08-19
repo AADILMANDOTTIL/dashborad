@@ -44,16 +44,16 @@ function Hero() {
                         </div>
                     </div>
                 </div>
-                <div className='p-10  '>
+                <div className=' md:p-5 '>
                     <div >
                         {
                             Category.map((data, index) => (
                                 <>
                                     <div className='flex justify-between items-center'>
 
-                                        <h1 className='p-2 text-[18px] font-semibold'> {data.items}</h1>
+                                        <h1 className='p-4 md:text-[16px] text-[12px] font-semibold'> {data.items}</h1>
                                         <div className='flex justify-center items-center'>
-                                            <div onClick={() => setShowLogin2(true)} className='w-[120px] flex justify-between items-center gap-2 md:w-[120px] h-[30px] bg-white p-2 rounded cursor-pointer'>
+                                            <div onClick={() => setShowLogin2(true)} className='w-[120px] flex justify-between items-center  md:w-[120px] h-[30px] bg-white pl-2 pr-5 rounded cursor-pointer'>
                                                 <h1 className='text-[12px]'>Add Widget</h1>
                                                 <GoPlus />
                                             </div>
