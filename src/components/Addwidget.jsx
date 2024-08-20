@@ -3,10 +3,9 @@ import { RxCross2 } from "react-icons/rx";
 import { StoreContext } from '../context/StoreContext';
 
 function AddWidget() {
-  const { setShowLogin2,showLogin2, submit, currentCategoryIndex ,handleSetShowLogin2} = useContext(StoreContext);
+  const { setShowLogin2, submit, currentCategoryIndex } = useContext(StoreContext);
   const [name, setName] = useState('');
   const [text, setText] = useState('');
-console.log("status"+setShowLogin2);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ console.log("status"+setShowLogin2);
       <form className='login-popup-container md:w-[50%] md:h-[60%]' onSubmit={handleSubmit} aria-labelledby='add-widget-title'>
         <div className='flex justify-between items-center text-2xl bg-black p-3'>
           <h1 id='add-widget-title' className='font-semibold text-white md:w-[100%]'>Add Widget</h1>
-          <RxCross2   onClick={() => setShowLogin2(false)}  className='cursor-pointer w-[20px] text-white' aria-label="Close" />
+          <RxCross2 onClick={() => setShowLogin2(false)} className='cursor-pointer w-[20px] text-white' aria-label="Close" />
         </div>
         <div className='p-5 justify-center items-center flex flex-col'>
           <input

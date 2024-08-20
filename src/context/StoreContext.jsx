@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const StoreContext = createContext(null);
 
@@ -6,33 +6,34 @@ const StoreContextProvider = (Props) => {
   const [ShowLogin, setShowLogin] = useState(false);
   const [ShowLogin2, setShowLogin2] = useState(false);
   const [Category, setCategory] = useState([
-    { items: "CSPM EXECUTIVE DASHBOARD", widgets: [] },
-    { items: "CWPP DASHBOARD", widgets: [] },
-    { items: "REGISTRY SCAN", widgets: [] }
-  ]);
-  const [dataWidget, setDatawidget] = useState([
-    { name: "Cloud Accounts", text: "connected" },
+    {
+      items: "CSPM EXECUTIVE DASHBOARD",
+      widgets: [
+        { name: "Cloud Accounts", text: "connected" },
     { name: "Cloud Account Risk Assessment", text: "failed" }
+      ]
+    },
+    {
+      items: "CWPP DASHBOARD",
+      widgets: [
+        { name: "Cloud Accounts", text: "connected" },
+    { name: "Cloud Account Risk Assessment", text: "failed" }
+      ]
+    },
+    {
+      items: "REGISTRY SCAN",
+      widgets: [
+        { name: "Cloud Accounts", text: "connected" },
+    { name: "Cloud Account Risk Assessment", text: "failed" }
+      ]
+    }
   ]);
-  console.log(dataWidget);
-
   const [searchValue, setSearchValue] = useState("");
-  const [filterValue, SetFilterValue] = useState(dataWidget);
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(null);
 
-  useEffect(() => {
-    // Initialize categories with default widgets if not already set
-    const initializedCategories = Category.map(category => ({
-      ...category,
-      widgets: category.widgets.length ? category.widgets : [...dataWidget]
-    }));
-    setCategory(initializedCategories);
-  }, [dataWidget]);
-
   const addCategory = (items) => {
-    const newCategory = { items, widgets: [...dataWidget] };
+    const newCategory = { items, widgets: [] };
     setCategory([...Category, newCategory]);
-    // console.log('New category added:', newCategory);
   };
 
   const DeleteCategory = (index) => {
@@ -42,48 +43,28 @@ const StoreContextProvider = (Props) => {
   };
 
   const submit = (categoryIndex, name, text) => {
-    if (name.trim() && text.trim()) {
-      const updatedCategory = [...Category];
-      if (updatedCategory[categoryIndex]) {
-        updatedCategory[categoryIndex].widgets.push({ name, text });
-        setCategory(updatedCategory);
-        setShowLogin2(false);
-        // console.log('Widget added:', { name, text });
-      } else {
-        alert("Invalid category index.");
-      }
-    } else {
-      alert("Please fill in all fields");
+    const updatedCategory = [...Category];
+    if (updatedCategory[categoryIndex]) {
+      updatedCategory[categoryIndex].widgets.push({ name, text });
+      setCategory(updatedCategory);
+      setShowLogin2(false);
     }
   };
 
   const DeleteWidget = (categoryIndex, widgetIndex) => {
     const updatedCategory = [...Category];
-    if (updatedCategory[categoryIndex]) {
-      updatedCategory[categoryIndex].widgets.splice(widgetIndex, 1);
-      setCategory(updatedCategory);
-    } else {
-      alert("Invalid category index.");
-    }
+    updatedCategory[categoryIndex].widgets.splice(widgetIndex, 1);
+    setCategory(updatedCategory);
   };
 
   const handleSetShowLogin2 = (show, index) => {
     setShowLogin2(show);
     setCurrentCategoryIndex(index);
   };
-  const onchange = (event) => {
-    const result = event.target.value.toLocaleLowerCase()
-    setSearchValue(result)
-    // console.log(result);
-  }
-  useEffect(() => {
-    const newData = dataWidget.filter((value) => {
-      return value.name.toLowerCase().includes(searchValue.toLowerCase());
-    });
-    SetFilterValue(newData);
-    // console.log(newData);
 
-  }, [dataWidget, searchValue]);
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
 
   const contextValue = {
     ShowLogin,
@@ -96,12 +77,8 @@ const StoreContextProvider = (Props) => {
     DeleteCategory,
     submit,
     DeleteWidget,
-    onchange,
-    filterValue,
-    handleChange: (e) => {
-      const { name, value } = e.target;
-      SetDetail((prev) => ({ ...prev, [name]: value }));
-    },
+    searchValue,
+    handleChange,
     currentCategoryIndex
   };
 
