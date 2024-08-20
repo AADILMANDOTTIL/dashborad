@@ -2,14 +2,14 @@ import React, { useContext, useState } from 'react';
 import { RxCross2 } from "react-icons/rx";
 import { StoreContext } from '../context/StoreContext';
 
-function AddCategory() { // Removed categoryIndex prop
+function AddCategory() { 
     const { addCategory, setShowLogin } = useContext(StoreContext);
     const [add, setAdd] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (add.trim()) {
-            addCategory(add); // Only pass the new category name
+            addCategory(add); 
             alert('Category added successfully');
             setAdd('');
             setShowLogin(false);

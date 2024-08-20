@@ -7,7 +7,7 @@ function Widget({ categoryIndex }) {
 
   const widgets = Category[categoryIndex]?.widgets || [];
 
-  // Filter widgets based on the search value
+  
   const filteredWidgets = searchValue
     ? widgets.filter(
         (widget) =>
